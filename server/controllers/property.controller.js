@@ -119,7 +119,7 @@ const deleteProperty = async (req, res) => {
     const session = await mongoose.startSession();
     session.startTransaction();
 
-    propertyToDelete.remove({ session });
+    await propertyToDelete.deleteOne({ session });
     propertyToDelete.creator.allProperties.pull(propertyToDelete);
 
     await propertyToDelete.creator.save({session});
@@ -130,6 +130,7 @@ const deleteProperty = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 
 export {
   getAllProperties,
