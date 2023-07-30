@@ -1,10 +1,11 @@
 import express from 'express';
 import * as dotenv from  'dotenv';
 import cors from 'cors';
+import mongoose from 'mongoose';
 
 import userRouter from './routes/user.routes.js';
 import propertyRouter from './routes/property.routes.js';
-import mongoose from 'mongoose';
+import swaggerDocs from './utils/swagger.js';
 
 dotenv.config();
 
@@ -33,6 +34,7 @@ connectDB()
   .then(() => {
     app.listen(8080, () => {
         console.log("listening for requests");
+        swaggerDocs(app, 8080);
     });
   })
   .catch(error => {
