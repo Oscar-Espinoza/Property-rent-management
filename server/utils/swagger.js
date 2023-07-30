@@ -24,7 +24,7 @@ const options = {
       }
     ]
   },
-  apis: ['./routes/property.routes.js', './mongodb/models/property.js'],
+  apis: ['./routes/*.routes.js', './mongodb/models/*.js'],
 };
 
 const swaggerSpec = swaggerJSDoc(options)
@@ -32,7 +32,7 @@ const swaggerSpec = swaggerJSDoc(options)
 function swaggerDocs(app, port){
   app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 
-  app.get('docs.json', (req, res) => {
+  app.get('/docs.json', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(swaggerSpec)
   })
